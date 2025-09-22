@@ -2,6 +2,7 @@ const productList = document.getElementById('product-list');
 const searchInput = document.getElementById('search');
 const sortBtn = document.getElementById('sortBtn');
 const darkModeToggle = document.getElementById('darkMode');
+const productForm = document.getElementById('productForm');
 
 let products = [];
 let sortedASC = true;
@@ -10,7 +11,7 @@ let sortedASC = true;
 
 async function fetchProducts() {
     const res = await fetch('http://localhost:3000/products');
-    products = await res.json();
+    const products = await res.json();
     renderProducts (products);
 }
 
@@ -21,8 +22,9 @@ function renderProducts(data) {
     data.forEach(p => {
         const div = document.createElement("div");
         div.className = "card";
-        div.innerHTML = `<h3> ${p.name} </h3>
-                        <p>vendor: ${p.vendor}</p>
+        div.innerHTML = `
+                        <h3> ${p.name} </h3>
+                        <p>Vendor: ${p.vendor}</p>
                         <p>Price: KES ${p.price}</p>`;
         productList.appendChild(div);
         
