@@ -21,15 +21,33 @@
         </div>
     </header>
 
+    <!-- search and sort -->
+     <section class="controls">
+        <input type="text" id="search" placeholder="Search products...">
+        <button id="sortBtn">Sort by Price</button>
+     </section>
     
-    <input type="text" id="search" placeholder="Search products...">
-    <button id="sortBtn">Sort by Price</button>
-    <label>
-        <input type="Checkbox" id="darkmode">Dark Mode
-    </label>
+    <!-- product list -->
+    <main id="product-list" class="product-grid"></main>
 
-    <div id="product-list"></div>
+    <!-- vendor section -->
+     <section id="vendor-section">
+        <h2 id="vendor-title"></h2>
+        <div id="vendor-list"></div>
+     </section>
 
+     <!-- footer -->
+      <footer class="footer">
+        <p>Connect with Us:</p>
+        <div class="socials">
+            <span> Facebook</span>
+            <span>Twitter</span>
+            <span>Youtube</span>
+            <span>Instagram</span>
+            <span>TikTok</span>
+        </div>
+      </footer>
+      
     <script src="app.js"></script>
 </body>
 </html>
