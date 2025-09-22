@@ -54,16 +54,26 @@ searchInput.addEventListener("input", e => {
     renderProducts(filtered);
 });
 
-// sort toggle
+// sort toggle for vendor price
 sortBtn.addEventListener("click", () => {
-    const sorted = [...products].sort((a, b) => sortedASC ? a.price - b.price : b.price - a.price);
-    sortedASC = !sortedASC;
-    renderProducts(sorted);
-})
+  const sorted = [...products].sort((a, b) => {
+    const priceA = a.vendors[0]?.price || 0;
+    const priceB = b.vendors[0]?.price || 0;
+    return sortedASC ? priceA - priceB : priceB - priceA;
+  });
+  sortedASC = !sortedASC;
+  renderProducts(sorted);
+});
 
 // Dark Mode toggle
 darkModeToggle.addEventListener("change", e => {
     document.body.classList.toggle("dark", e.target.checked);
 });
+
+// Dummy alerts for navbar buttons
+document.getElementById('signupBtn').addEventListener("click", () => alert("Signup feature coming soon!"));
+document.getElementById('categoriesBtn').addEventListener("click", () => alert("Categories feature coming soon!"));
+document.getElementById('contactBtn').addEventListener("click", () => alert("Contact Us feature coming soon!"));
+
 
 fetchProducts();
