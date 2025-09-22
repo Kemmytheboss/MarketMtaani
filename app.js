@@ -35,3 +35,10 @@ searchInput.addEventListener("input", e => {
     const filtered = products.filter(p=> p.name.toLowerCase().includes(query));
     renderProducts(filtered);
 });
+
+// sort toggle
+sortBtn.addEventListener("click", () => {
+    const sorted = [...products].sort((a, b) => sortedASC ? a.price - b.price : b.price - a.price);
+    sortedASC = !sortedASC;
+    renderProducts(sorted);
+})
