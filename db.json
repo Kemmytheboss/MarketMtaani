@@ -1,0 +1,9 @@
+{
+  "products": [
+    { "id": 1, "name": "Maize Flour 2kg", "vendor": "Mama Mboga", "price": 180 },
+    { "id": 2, "name": "Sugar 1kg", "vendor": "Kariobangi Shop", "price": 140 },
+    { "id": 3, "name": "Cooking Oil 1L", "vendor": "Quickmart", "price": 350 },
+    { "id": 4, "name": "Bread", "vendor": "Tuskys", "price": 60 },
+    { "id": 5, "name": "Milk 500ml", "vendor": "Local Dairy", "price": 55 }
+  ]
+}
