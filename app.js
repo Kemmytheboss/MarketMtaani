@@ -1,53 +1,44 @@
 const productList = document.getElementById('product-list');
-const searchInput = document.getElementById('search');
-const sortBtn = document.getElementById('sortBtn');
-const darkModeToggle = document.getElementById('darkMode');
-const productForm = document.getElementById('productForm');
-
-let products = [];
-let sortedASC = true;
-
-// fetch data from json-server
+const vendorList = document.getElementById('vendor-list'); // 👈 create this div in HTML
 
 async function fetchProducts() {
     const res = await fetch('http://localhost:3000/products');
-    products = await res.json();
-    renderProducts (products);
+    products = await res.json(); // save to global products array
+    renderProducts(products);
 }
 
 // render products
-
 function renderProducts(data) {
     productList.innerHTML = "";
+    vendorList.innerHTML = ""; // clear vendors when re-rendering products
+
     data.forEach(p => {
         const div = document.createElement("div");
         div.className = "card";
         div.innerHTML = `
-                        <h3> ${p.name} </h3>
-                        <p>Vendor: ${p.vendor}</p>
-                        <p>Price: KES ${p.price}</p>`;
-        productList.appendChild(div);
+            <img src="${p.image}" alt="${p.name}" width="100">
+            <h3>${p.name}</h3>
+        `;
         
+        // 👇 Add click listener to show vendors
+        div.addEventListener("click", () => renderVendors(p));
+        
+        productList.appendChild(div);
     });
 }
 
-// search filter
-searchInput.addEventListener("input", e => {
-    const query = e.target.value.toLowerCase();
-    const filtered = products.filter(p=> p.name.toLowerCase().includes(query));
-    renderProducts(filtered);
-});
-
-// sort toggle
-sortBtn.addEventListener("click", () => {
-    const sorted = [...products].sort((a, b) => sortedASC ? a.price - b.price : b.price - a.price);
-    sortedASC = !sortedASC;
-    renderProducts(sorted);
-})
-
-// Dark Mode toggle
-darkModeToggle.addEventListener("change", e => {
-    document.body.classList.toggle("dark", e.target.checked);
-});
+// render vendors for a product
+function renderVendors(product) {
+    vendorList.innerHTML = `<h2>${product.name} Vendors</h2>`;
+    product.vendors.forEach(v => {
+        const div = document.createElement("div");
+        div.className = "vendor-card";
+        div.innerHTML = `
+            <p><strong>${v.name}</strong></p>
+            <p>Price: KES ${v.price}</p>
+        `;
+        vendorList.appendChild(div);
+    });
+}
 
 fetchProducts();
