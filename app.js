@@ -11,7 +11,7 @@ let sortedASC = true;
 
 async function fetchProducts() {
     const res = await fetch('http://localhost:3000/products');
-    const products = await res.json();
+    products = await res.json();
     renderProducts (products);
 }
 

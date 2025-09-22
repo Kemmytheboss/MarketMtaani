@@ -1,36 +1,78 @@
 {
   "products": [
     {
-    "id": 1,
-     "name": "Maize Flour 2kg",
-     "vendor": "Mama Mboga", "price": 180 },
+      "id": 1,
+      "name": "Tomatoes (1kg)",
+      "vendor": "Mama Aisha",
+      "price": 120,
+      "location": "Gikomba",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Tomatoes (1kg)",
+      "vendor": "Mama Njeri",
+      "price": 115,
+      "location": "Gikomba",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Tomatoes (1kg)",
+      "vendor": "Mama Atieno",
+      "price": 125,
+      "location": "Gikomba",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg"
+    },
 
+    {
+      "id": 4,
+      "name": "Onions (1kg)",
+      "vendor": "Mama Aisha",
+      "price": 140,
+      "location": "Gikomba",
+      "image": "https://commons.wikimedia.org/wiki/File:Red_onions.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Onions (1kg)",
+      "vendor": "Mama Njeri",
+      "price": 135,
+      "location": "Gikomba",
+      "image": "https://commons.wikimedia.org/wiki/File:Red_onions.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Onions (1kg)",
+      "vendor": "Mama Atieno",
+      "price": 138,
+      "location": "Gikomba",
+      "image": "https://commons.wikimedia.org/wiki/File:Red_onions.jpg"
+    },
 
-    { 
-    "id": 2, 
-    "name": "Sugar 1kg",
-     "vendor": "Kariobangi Shop", 
-     "price": 140 },
-
-
-    { 
-    "id": 3, 
-    "name": "Cooking Oil 1L", 
-    "vendor": "Quickmart", 
-    "price": 350 },
-
-
-    { 
-    "id": 4, 
-    "name": "Bread", 
-    "vendor": "Tuskys", 
-    "price": 60 },
-
-
-    { 
-    "id": 5, 
-    "name": "Milk 500ml", 
-    "vendor": "Local Dairy", 
-    "price": 55 }
+    {
+      "id": 7,
+      "name": "Kales (1 bunch)",
+      "vendor": "Mama Aisha",
+      "price": 40,
+      "location": "Gikomba",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Sukuma_wiki.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Kales (1 bunch)",
+      "vendor": "Mama Njeri",
+      "price": 35,
+      "location": "Gikomba",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Sukuma_wiki.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Kales (1 bunch)",
+      "vendor": "Mama Atieno",
+      "price": 38,
+      "location": "Gikomba",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Sukuma_wiki.jpg"
+    }
   ]
 }
