@@ -42,3 +42,10 @@ sortBtn.addEventListener("click", () => {
     sortedASC = !sortedASC;
     renderProducts(sorted);
 })
+
+// Dark Mode toggle
+darkModeToggle.addEventListener("change", e => {
+    document.body.classList.toggle("dark", e.target.checked);
+});
+
+fetchProducts();
