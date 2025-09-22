@@ -13,3 +13,18 @@ async function fetchProducts() {
     products = await res.json();
     renderProducts (products);
 }
+
+// render products
+
+function renderProducts(data) {
+    productList.innerHTML = "";
+    data.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `<h3> ${p.name} </h3>
+                        <p>vendor: ${p.vendor}</p>
+                        <p>Price: KES ${p.price}</p>`;
+        productList.appendChild(div);
+        
+    });
+}
