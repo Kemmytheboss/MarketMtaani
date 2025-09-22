@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Tomatoes",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg",
+      "image": "images/Tomato_je.jpg",
       "vendors": [
         { "id": 1, "name": "Mama Aisha", "price": 120 },
         { "id": 2, "name": "Mama Njeri", "price": 100 },
@@ -13,7 +13,7 @@
     {
       "id": 2,
       "name": "Onions",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Onion_on_White.JPG",
+      "image": "images/RedOnion.PNG",
       "vendors": [
         { "id": 1, "name": "Mama Aisha", "price": 200 },
         { "id": 2, "name": "Mama Njeri", "price": 180 }
@@ -22,10 +22,30 @@
     {
       "id": 3,
       "name": "Kales (Sukuma Wiki)",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Kale-Bundle.jpg",
+      "image": "images/Collard-Greens-Bundle.jpg",
       "vendors": [
         { "id": 1, "name": "Mama Wanjiru", "price": 50 },
         { "id": 2, "name": "Mama Aisha", "price": 45 }
+      ]
+    },
+     {
+      "id": 4,
+      "name": "Grapes (Grapes)",
+      "image": "images/grapes.PNG",
+      "vendors": [
+        { "id": 1, "name": "Mama Wanjiru", "price": 350 },
+        { "id": 2, "name": "Mama Aisha", "price": 450 },
+         {"id": 3, "name" : "Mama Moraa", "price" : 380}
+      ]
+    },
+
+     {
+      "id": 5,
+      "name": "Mangoes (Mangoes)",
+      "image": "images/mangoes.PNG",
+      "vendors": [
+        { "id": 1, "name": "Mama Kerubo", "price": 20 },
+        { "id": 2, "name": "Mama John", "price": 25 }
       ]
     }
   ]

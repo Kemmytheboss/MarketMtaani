@@ -39,7 +39,7 @@ function renderProducts(data) {
 function renderVendors(product) {
     vendorTitle.textContent = `Vendors for ${product.name}`;
     vendorList.innerHTML = "";
-    products.vendors.forEach (v => {
+    product.vendors.forEach (v => {
         const div =document.createElement('div');
         div.className ='vendor';
         div.innerHTML = `<strong>${v.name}</strong> -KES ${v.price}`;
@@ -57,8 +57,9 @@ searchInput.addEventListener("input", e => {
 // sort toggle for vendor price
 sortBtn.addEventListener("click", () => {
   const sorted = [...products].sort((a, b) => {
-    const priceA = a.vendors[0]?.price || 0;
-    const priceB = b.vendors[0]?.price || 0;
+    const priceA = Math.min(...a.vendors.map(v => v.price));
+    const priceB = Math.min(...b.vendors.map(v => v.price));
+
     return sortedASC ? priceA - priceB : priceB - priceA;
   });
   sortedASC = !sortedASC;
