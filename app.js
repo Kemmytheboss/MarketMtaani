@@ -23,48 +23,64 @@ let cartCount = 0;
 let cartItems = [];
 
 function renderProducts(data) {
-    productList.innerHTML = "";
-    data.forEach(p => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-                        <img src="${p.image}" alt="${p.name}">
-                        <h3> ${p.name} </h3>
-                        <p>Click to view vendors</p>
+  productList.innerHTML = "";
+  data.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <img src="${p.image}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <p>Click to view vendors</p>
+      <form class="qty-form">
+        <label>Quantity:</label>
+        <input type="number" min="1" value="1" required>
+        <select>
+          <option value="pcs">Pieces</option>
+          <option value="kg">Kgs</option>
+        </select>
+        <button type="submit">Add to Cart</button>
+      </form>
+    `;
 
-                        <form class="qty-form">
-                            <label>Quantity:</label>
-                            <input type="number" min="1" value="1" required>
-
-                            <select>
-                                <option value=kgs">Kgs</option>
-                                <option value="pieces">Pieces</option>
-                            </select>
-                            <button type="submit" class="add-to-cart">Add to Cart</button>
-                        </form>
-                        `;
-
-                        // click to view vendors
-                        div.addEventListener('click', (e) => {
-                            if (!e.target.closest(".qty-form")) {
-                                renderVendors(p);
-                            }
-                            });
-
-
-                        // handle form submit
-                        const form = div.querySelector(".order-form");
-                        form.addEventListener("submit", e => {
-                            e.preventDefault();
-                            const qty = form.querySelector(".qty-input").value;
-                            const unit = form.querySelector(".unit-select").value;
-                            alert(`You selected ${qty} ${unit} of ${p.name}`);
-                        });
-
-                        productList.appendChild(div);
-        
+    div.addEventListener('click', (e) => {
+      if (!e.target.closest(".qty-form")) {
+        renderVendors(p);
+      }
     });
+
+    // Form handling
+    div.querySelector(".qty-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const qty = e.target.querySelector("input").value;
+      const unit = e.target.querySelector("select").value;
+
+      cartCount++;
+      cartItems.push({ name: p.name, qty, unit });
+
+      document.getElementById("cart-count").textContent = cartCount;
+      updateCartDropdown();
+    });
+
+    productList.appendChild(div);
+  });
 }
+
+function updateCartDropdown() {
+  const cartList = document.getElementById("cart-items");
+  cartList.innerHTML = "";
+  cartItems.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.name} - ${item.qty} ${item.unit}`;
+    cartList.appendChild(li);
+  });
+}
+
+// Toggle dropdown
+document.getElementById("cart-btn").addEventListener("click", () => {
+  const dropdown = document.getElementById("cart-dropdown");
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+});
+
 
 // render vendor list for a product
 function renderVendors(product) {
