@@ -19,6 +19,8 @@ async function fetchProducts() {
 
 // render product card
 
+let cartCount = 0;
+
 function renderProducts(data) {
     productList.innerHTML = "";
     data.forEach(p => {
@@ -29,19 +31,17 @@ function renderProducts(data) {
                         <h3> ${p.name} </h3>
                         <p>Click to view vendors</p>
 
-                        <form class="order-form">
+                        <form class="qty-form">
+                            <label>Quantity:</label>
                             <input
-                            type="number"
-                            min="1"
-                            placeholder="Enter quantity"
-                            class="qty-input"
-                            required
-                            >
+                            type="number" min="1" placeholder="Enter quantity" 
+                            class="qty-input" required>
+
                             <select class="unit-select">
                                 <option value=kgs">Kgs</option>
                                 <option value="pieces">Pieces</option>
                             </select>
-                            <button type="submit" class="add-btn">Add to Cart</button>
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
                         </form>
                         `;
 
