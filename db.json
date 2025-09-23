@@ -47,6 +47,36 @@
         { "id": 1, "name": "Mama Kerubo", "price": 20 },
         { "id": 2, "name": "Mama John", "price": 25 }
       ]
+    },
+     {
+      "id": 4,
+      "name": "Potatoes",
+      "image": "images/potatoes.PNG",
+      "vendors": [
+        { "name": "Mama Mboga A", "price": 120 },
+        { "name": "Mama Mboga B", "price": 130 },
+        { "name": "Mama Mboga C", "price": 115 }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Carrots",
+      "image": "images/carrots.PNG",
+      "vendors": [
+        { "name": "Mama Mboga A", "price": 60 },
+        { "name": "Mama Mboga B", "price": 58 },
+        { "name": "Mama Mboga C", "price": 62 }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Cabbage",
+      "image": "images/cabbage.PNG",
+      "vendors": [
+        { "name": "Mama Mboga A", "price": 40 },
+        { "name": "Mama Mboga B", "price": 42 },
+        { "name": "Mama Mboga C", "price": 38 }
+      ]
     }
   ]
 }
