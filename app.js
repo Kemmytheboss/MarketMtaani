@@ -20,6 +20,7 @@ async function fetchProducts() {
 // render product card
 
 let cartCount = 0;
+let cartItems = [];
 
 function renderProducts(data) {
     productList.innerHTML = "";
@@ -33,11 +34,9 @@ function renderProducts(data) {
 
                         <form class="qty-form">
                             <label>Quantity:</label>
-                            <input
-                            type="number" min="1" placeholder="Enter quantity" 
-                            class="qty-input" required>
+                            <input type="number" min="1" value="1" required>
 
-                            <select class="unit-select">
+                            <select>
                                 <option value=kgs">Kgs</option>
                                 <option value="pieces">Pieces</option>
                             </select>
@@ -46,7 +45,11 @@ function renderProducts(data) {
                         `;
 
                         // click to view vendors
-                        div.querySelector('p').addEventListener('click', () => renderVendors (p));
+                        div.addEventListener('click', (e) => {
+                            if (!e.target.closest(".qty-form")) {
+                                renderVendors(p);
+                            }
+                            });
 
 
                         // handle form submit
