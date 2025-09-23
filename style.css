@@ -180,3 +180,9 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(26px);
 }
+
+.dark-mode-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between text and toggle */
+}
