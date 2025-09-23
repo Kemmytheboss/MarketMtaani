@@ -49,7 +49,7 @@
       ]
     },
      {
-      "id": 4,
+      "id": 6,
       "name": "Potatoes",
       "image": "images/potatoes.PNG",
       "vendors": [
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 7,
       "name": "Carrots",
       "image": "images/carrots.PNG",
       "vendors": [
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 8,
       "name": "Cabbage",
       "image": "images/cabbage.PNG",
       "vendors": [

@@ -27,9 +27,37 @@ function renderProducts(data) {
         div.innerHTML = `
                         <img src="${p.image}" alt="${p.name}">
                         <h3> ${p.name} </h3>
-                        <p>Click to view vendors</p>`;
+                        <p>Click to view vendors</p>
 
-                        div.addEventListener('click', () => renderVendors (p));
+                        <form class="order-form">
+                            <input
+                            type="number"
+                            min="1"
+                            placeholder="Enter quantity"
+                            class="qty-input"
+                            required
+                            >
+                            <select class="unit-select">
+                                <option value=kgs">Kgs</option>
+                                <option value="pieces">Pieces</option>
+                            </select>
+                            <button type="submit" class="add-btn">Add to Cart</button>
+                        </form>
+                        `;
+
+                        // click to view vendors
+                        div.querySelector('p').addEventListener('click', () => renderVendors (p));
+
+
+                        // handle form submit
+                        const form = div.querySelector(".order-form");
+                        form.addEventListener("submit", e => {
+                            e.preventDefault();
+                            const qty = form.querySelector(".qty-input").value;
+                            const unit = form.querySelector(".unit-select").value;
+                            alert(`You selected ${qty} ${unit} of ${p.name}`);
+                        });
+
                         productList.appendChild(div);
         
     });
