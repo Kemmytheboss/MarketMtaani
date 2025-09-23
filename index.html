@@ -1,68 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarketMtaani</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarketMtaani</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- navbar -->
-    <header class="navbar">
-        <h1>MarketMtaani</h1>
-        <div class="nav-actions">
-            <label>
-                Dark Mode
-                <input type="checkbox" id="darkMode">
-            </label>
-            <button id="signupBtn">SignUp</button>
-            <button id="categoriesBtn">Categories</button>
-            <button id="contactBtn">Contact Us</button>
-        </div>
-        <div class="cart-notification">
-            <span id="cart-count">0</span>
-        </div>
-        <div class="cart-wrapper">
 
-        <div class="cart-notification" id="cart-btn">
-            <span id="cart-count">0</span>
-        </div>
-        <div class="cart-dropdown" id="cart-dropdown">
-            <h3>My Cart</h3>
-            <ul id="cart-items"></ul>
-        </div>
-        </div>
+  <!-- navbar -->
+   
+  <header class="navbar">
+    <h1>MarketMtaani</h1>
+    <div class="nav-actions">
+      <label class="switch">
+        Dark Mode
+        <input type="checkbox" id="darkMode">
+        <span class="slider round"></span>
+      </label>
+      <button id="signupBtn">SignUp</button>
+      <button id="categoriesBtn">Categories</button>
+      <button id="contactBtn">Contact Us</button>
+    </div>
+    <div class="cart-wrapper">
+      <div class="cart-notification" id="cart-btn">
+        <span id="cart-count">0</span>
+      </div>
+      <div class="cart-dropdown" id="cart-dropdown">
+        <h3>My Cart</h3>
+        <ul id="cart-items"></ul>
+      </div>
+    </div>
+  </header>
 
+  <!-- search and sort -->
+  <section class="controls">
+    <input type="text" id="search" placeholder="Search products...">
+    <button id="sortBtn">Sort by Price</button>
+  </section>
 
-    </header>
+  <!-- product list -->
+  <main id="product-list" class="product-grid"></main>
 
-    <!-- search and sort -->
-     <section class="controls">
-        <input type="text" id="search" placeholder="Search products...">
-        <button id="sortBtn">Sort by Price</button>
-     </section>
-    
-    <!-- product list -->
-    <main id="product-list" class="product-grid"></main>
+  <!-- footer -->
+  <footer class="footer">
+    <p>Connect with Us:</p>
+    <div class="socials">
+      <span>Facebook</span>
+      <span>Twitter</span>
+      <span>Youtube</span>
+      <span>Instagram</span>
+      <span>TikTok</span>
+    </div>
+  </footer>
 
-    <!-- vendor section -->
-     <section id="vendor-section">
-        <h2 id="vendor-title"></h2>
-        <div id="vendor-list"></div>
-     </section>
-
-     <!-- footer -->
-      <footer class="footer">
-        <p>Connect with Us:</p>
-        <div class="socials">
-            <span> Facebook</span>
-            <span>Twitter</span>
-            <span>Youtube</span>
-            <span>Instagram</span>
-            <span>TikTok</span>
-        </div>
-      </footer>
-
-    <script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
