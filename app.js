@@ -8,19 +8,20 @@ let sortedASC = true;
 let cartCount = 0;
 let cartItems = [];
 
-// Fetch products from json-server
+// Fetch products
 async function fetchProducts() {
     const res = await fetch('http://localhost:3000/products');
     products = await res.json();
     renderProducts(products);
 }
 
-// Render product cards
+// Render products
 function renderProducts(data) {
     productList.innerHTML = "";
     data.forEach(p => {
         const div = document.createElement("div");
         div.className = "card";
+        div.id = `product-${p.id}`;
         div.innerHTML = `
             <div class="product-info">
                 <img src="${p.image}" alt="${p.name}">
@@ -34,59 +35,64 @@ function renderProducts(data) {
                             <option value="kg">Kgs</option>
                         </select>
                     </div>
-                    <button type="submit">Add to Cart</button>
+                    <button type="submit">Select Vendors</button>
                 </form>
             </div>
-            <div class="vendor-section" id="vendor-section-${p.id}">
-                <!-- Vendor info will load here -->
-            </div>
+            <div class="vendor-section" id="vendor-section-${p.id}"></div>
         `;
 
-        // Click product to show vendors inline
-        div.addEventListener('click', (e) => {
-            if (!e.target.closest(".qty-form")) {
-                const form = div.querySelector(".qty-form");
-                const qty = parseFloat(form.querySelector("input").value);
-                const unit = form.querySelector("select").value;
-                renderVendors(p, qty, unit);
-            }
-        });
-
-        // Handle "Add to Cart" button click to show vendor selection
+        // Form submit: show vendors
         div.querySelector(".qty-form").addEventListener("submit", (e) => {
             e.preventDefault();
-            const qty = parseFloat(e.target.querySelector("input").value);
-            const unit = e.target.querySelector("select").value;
-            renderVendors(p, qty, unit);
+            renderVendors(p);
         });
 
         productList.appendChild(div);
     });
 }
 
-// Render vendors inline
-function renderVendors(product, qty = 1, unit = 'pcs') {
+// Render vendors for a product
+function renderVendors(product) {
     const vendorContainer = document.getElementById(`vendor-section-${product.id}`);
+    const form = document.querySelector(`#product-${product.id} .qty-form`);
+    const qtyInput = form.querySelector("input");
+    const unitSelect = form.querySelector("select");
+    const qty = parseFloat(qtyInput.value) || 1;
+
     vendorContainer.innerHTML = `<h4>Vendors for ${product.name}</h4>`;
 
     product.vendors.forEach((v, index) => {
         const div = document.createElement('div');
         div.className = 'vendor';
-        let totalPrice = v.price * qty;
-        const disabled = qty > v.stock ? 'disabled' : '';
-
+        const totalPrice = v.price * qty;
         div.innerHTML = `
-            <input type="radio" name="selected-vendor-${product.id}" id="vendor-${product.id}-${index}" value="${v.name}" ${disabled}>
+            <input type="radio" name="selected-vendor-${product.id}" id="vendor-${product.id}-${index}" value="${v.name}">
             <label for="vendor-${product.id}-${index}">
-                <strong>${v.name}</strong> - KES ${v.price} | Total: KES ${totalPrice} | Stock: ${v.stock}
+                <strong>${v.name}</strong> - KES ${v.price} | Total: KES <span id="total-${product.id}-${index}">${totalPrice}</span> | Stock: <span id="stock-${product.id}-${index}">${v.stock}</span>
             </label>
         `;
         vendorContainer.appendChild(div);
     });
 
-    const addBtn = document.createElement('button');
-    addBtn.textContent = "Add Selected Vendor to Cart";
-    addBtn.addEventListener('click', () => {
+    // Update totals live when quantity changes
+    qtyInput.oninput = () => {
+        const newQty = parseFloat(qtyInput.value) || 1;
+        product.vendors.forEach((v, index) => {
+            const totalSpan = document.getElementById(`total-${product.id}-${index}`);
+            totalSpan.textContent = v.price * newQty;
+        });
+    };
+
+    // Add to cart button
+    let addBtn = vendorContainer.querySelector('.add-vendor-btn');
+    if (!addBtn) {
+        addBtn = document.createElement('button');
+        addBtn.className = 'add-vendor-btn';
+        addBtn.textContent = "Add Selected Vendor to Cart";
+        vendorContainer.appendChild(addBtn);
+    }
+
+    addBtn.onclick = () => {
         const selected = vendorContainer.querySelector(`input[name="selected-vendor-${product.id}"]:checked`);
         if (!selected) {
             alert("Please select a vendor!");
@@ -95,29 +101,35 @@ function renderVendors(product, qty = 1, unit = 'pcs') {
 
         const vendorName = selected.value;
         const vendorObj = product.vendors.find(v => v.name === vendorName);
+        const qtyVal = parseFloat(qtyInput.value) || 1;
+        const unitVal = unitSelect.value;
 
-        if (qty > vendorObj.stock) {
+        if (qtyVal > vendorObj.stock) {
             alert("Not enough stock for this vendor!");
             return;
         }
 
-        vendorObj.stock -= qty;
+        // Deduct stock
+        vendorObj.stock -= qtyVal;
+        document.getElementById(`stock-${product.id}-${product.vendors.indexOf(vendorObj)}`).textContent = vendorObj.stock;
 
+        // Add to cart
         cartCount++;
-        cartItems.push({
-            name: product.name,
-            qty,
-            unit,
-            vendor: vendorName
-        });
-
+        cartItems.push({ name: product.name, qty: qtyVal, unit: unitVal, vendor: vendorName });
         document.getElementById("cart-count").textContent = cartCount;
         updateCartDropdown();
 
-        vendorContainer.innerHTML = ""; // hide after adding
-    });
+        // Reset radio selection
+        selected.checked = false;
 
-    vendorContainer.appendChild(addBtn);
+        // Confirmation message
+        const msg = document.createElement('div');
+        msg.textContent = "Added to cart!";
+        msg.style.color = "green";
+        msg.style.fontSize = "12px";
+        vendorContainer.appendChild(msg);
+        setTimeout(() => msg.remove(), 1500);
+    };
 }
 
 // Update cart dropdown
@@ -140,6 +152,7 @@ function updateCartDropdown() {
         cartList.appendChild(li);
     });
 
+    // Summary
     const summary = document.createElement("li");
     summary.innerHTML = `<strong>Total Products: ${totalItems}</strong> | <strong>Total Amount: KES ${totalAmount}</strong>`;
     summary.style.borderBottom = "1px solid #ccc";
@@ -160,7 +173,7 @@ searchInput.addEventListener("input", e => {
     renderProducts(filtered);
 });
 
-// Sort toggle by vendor price
+// Sort toggle
 sortBtn.addEventListener("click", () => {
     const sorted = [...products].sort((a, b) => {
         const priceA = Math.min(...a.vendors.map(v => v.price));
@@ -171,12 +184,12 @@ sortBtn.addEventListener("click", () => {
     renderProducts(sorted);
 });
 
-// Dark mode
+// Dark mode toggle
 darkModeToggle.addEventListener("change", e => {
     document.body.classList.toggle("dark", e.target.checked);
 });
 
-// Dummy alerts
+// Navbar alerts
 document.getElementById('signupBtn').addEventListener("click", () => alert("Signup feature coming soon!"));
 document.getElementById('categoriesBtn').addEventListener("click", () => alert("Categories feature coming soon!"));
 document.getElementById('contactBtn').addEventListener("click", () => alert("Contact Us feature coming soon!"));
