@@ -195,3 +195,37 @@ document.getElementById('categoriesBtn').addEventListener("click", () => alert("
 document.getElementById('contactBtn').addEventListener("click", () => alert("Contact Us feature coming soon!"));
 
 fetchProducts();
+
+document.getElementById("getLocationBtn").addEventListener("click", () => {
+    const display = document.getElementById("locationDisplay");
+
+    if (!navigator.geolocation) {
+        display.textContent = "Geolocation is not supported by your browser.";
+        return;
+    }
+
+    display.textContent = "Locating…";
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const latitude = position.coords.latitude.toFixed(6);
+            const longitude = position.coords.longitude.toFixed(6);
+            display.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
+        },
+        (error) => {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    display.textContent = "User denied the request for Geolocation.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    display.textContent = "Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    display.textContent = "The request to get user location timed out.";
+                    break;
+                default:
+                    display.textContent = "An unknown error occurred.";
+            }
+        }
+    );
+});
