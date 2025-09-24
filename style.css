@@ -27,47 +27,6 @@ body {
   padding: 8px;
 }
 
-/* Hero Section */
-#hero {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 90vh; /* Bigger to fit images */
-}
-
-.hero-slider {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  height: 100%;
-}
-
-.hero-slide {
-  min-width: 100%;
-  position: relative;
-}
-
-.hero-slide img {
-  width: 100%;
-  height: 100%;
-   object-fit: cover;/* keeps images sharp */
-   object-position: center;
-   image-rendering: auto;
-}
-
-#hero .prev, #hero .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-}
-
-#hero .prev { left: 10px; }
-#hero .next { right: 10px; }
-
 /* Product Grid */
 .product-grid {
   display: grid;
@@ -312,6 +271,6 @@ button:disabled {
 
 .intro-image img {
   width: 100%;
-  max-width: 450px;
+  max-width: 800px;
   border-radius: 12px;
 }
