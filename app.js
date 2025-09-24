@@ -37,6 +37,23 @@ function renderProducts(data) {
   });
 }
 
+// ----------------- SEARCH FUNCTIONALITY -------------------
+const searchInput = document.getElementById("search");
+
+searchInput.addEventListener("input", (e) => {
+  const query = e.target.value.toLowerCase().trim();
+
+  if (query === "") {
+    renderProducts(products); // show all if search empty
+  } else {
+    const filtered = products.filter(p =>
+      p.name.toLowerCase().includes(query) ||
+      (p.description && p.description.toLowerCase().includes(query))
+    );
+    renderProducts(filtered);
+  }
+});
+
 /* ----------------- GEOLOCATION ------------------- */
 
 // Get user location
@@ -121,12 +138,16 @@ function showVendors(product) {
         cartItems.push({
           product: product.name,
           vendor: vendor.name,
-          price: vendor.price,
+          price: vendor.prices[unit],
           qty,
           unit
         });
         updateCart();
+        // shows alert for confirmation
+          alert(`${qty} ${unit} of ${product.name} from ${vendor.name} added to cart!`);
+
       });
+
 
       // Unit selection buttons
       vendorDiv.querySelectorAll(".unit-btn").forEach(btn => {
