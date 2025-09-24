@@ -1,231 +1,244 @@
-const productList = document.getElementById('product-list'); 
-const searchInput = document.getElementById('search');
-const sortBtn = document.getElementById('sortBtn');
-const darkModeToggle = document.getElementById('darkMode');
+const productList = document.getElementById('product-list');
+const cartList = document.getElementById("cart-items");
+const cartBtn = document.getElementById("cart-btn");
+const cartDropdown = document.getElementById("cart-dropdown");
+const vendorPanel = document.getElementById("vendor-panel");
+const vendorContent = document.getElementById("vendor-content");
+const closeVendorBtn = document.getElementById("close-vendor");
 
 let products = [];
-let sortedASC = true;
-let cartCount = 0;
 let cartItems = [];
+let cartCount = 0;
 
-// Fetch products
+// Fetch products from db.json
 async function fetchProducts() {
-    const res = await fetch('http://localhost:3000/products');
-    products = await res.json();
-    renderProducts(products);
+  const res = await fetch("http://localhost:3000/products");
+  products = await res.json();
+  renderProducts(products);
 }
 
-// Render products
 function renderProducts(data) {
-    productList.innerHTML = "";
-    data.forEach(p => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.id = `product-${p.id}`;
-        div.innerHTML = `
-            <div class="product-info">
-                <img src="${p.image}" alt="${p.name}">
-                <h3>${p.name}</h3>
-                <form class="qty-form">
-                    <div class="qty-unit">
-                        <label>Quantity:</label>
-                        <input type="number" min="1" value="1" required>
-                        <select>
-                            <option value="pcs">Pieces</option>
-                            <option value="kg">Kgs</option>
-                        </select>
-                    </div>
-                    <button type="submit">Select Vendors</button>
-                </form>
-            </div>
-            <div class="vendor-section" id="vendor-section-${p.id}"></div>
-        `;
+  productList.innerHTML = "";
+  data.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <img src="${p.image}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <p>${p.description || "Fresh and quality products available."}</p>
+      <button class="select-vendor-btn">Select Vendor</button>
+    `;
 
-        // Form submit: show vendors
-        div.querySelector(".qty-form").addEventListener("submit", (e) => {
-            e.preventDefault();
-            renderVendors(p);
-        });
-
-        productList.appendChild(div);
+    // Open vendor panel
+    div.querySelector(".select-vendor-btn").addEventListener("click", () => {
+      showVendors(p);
     });
+
+    productList.appendChild(div);
+  });
 }
 
-// Render vendors for a product
-function renderVendors(product) {
-    const vendorContainer = document.getElementById(`vendor-section-${product.id}`);
-    const form = document.querySelector(`#product-${product.id} .qty-form`);
-    const qtyInput = form.querySelector("input");
-    const unitSelect = form.querySelector("select");
-    const qty = parseFloat(qtyInput.value) || 1;
+/* ----------------- GEOLOCATION ------------------- */
 
-    vendorContainer.innerHTML = `<h4>Vendors for ${product.name}</h4>`;
-
-    product.vendors.forEach((v, index) => {
-        const div = document.createElement('div');
-        div.className = 'vendor';
-        const totalPrice = v.price * qty;
-        div.innerHTML = `
-            <input type="radio" name="selected-vendor-${product.id}" id="vendor-${product.id}-${index}" value="${v.name}">
-            <label for="vendor-${product.id}-${index}">
-                <strong>${v.name}</strong> - KES ${v.price} | Total: KES <span id="total-${product.id}-${index}">${totalPrice}</span> | Stock: <span id="stock-${product.id}-${index}">${v.stock}</span>
-            </label>
-        `;
-        vendorContainer.appendChild(div);
-    });
-
-    // Update totals live when quantity changes
-    qtyInput.oninput = () => {
-        const newQty = parseFloat(qtyInput.value) || 1;
-        product.vendors.forEach((v, index) => {
-            const totalSpan = document.getElementById(`total-${product.id}-${index}`);
-            totalSpan.textContent = v.price * newQty;
-        });
-    };
-
-    // Add to cart button
-    let addBtn = vendorContainer.querySelector('.add-vendor-btn');
-    if (!addBtn) {
-        addBtn = document.createElement('button');
-        addBtn.className = 'add-vendor-btn';
-        addBtn.textContent = "Add Selected Vendor to Cart";
-        vendorContainer.appendChild(addBtn);
-    }
-
-    addBtn.onclick = () => {
-        const selected = vendorContainer.querySelector(`input[name="selected-vendor-${product.id}"]:checked`);
-        if (!selected) {
-            alert("Please select a vendor!");
-            return;
-        }
-
-        const vendorName = selected.value;
-        const vendorObj = product.vendors.find(v => v.name === vendorName);
-        const qtyVal = parseFloat(qtyInput.value) || 1;
-        const unitVal = unitSelect.value;
-
-        if (qtyVal > vendorObj.stock) {
-            alert("Not enough stock for this vendor!");
-            return;
-        }
-
-        // Deduct stock
-        vendorObj.stock -= qtyVal;
-        document.getElementById(`stock-${product.id}-${product.vendors.indexOf(vendorObj)}`).textContent = vendorObj.stock;
-
-        // Add to cart
-        cartCount++;
-        cartItems.push({ name: product.name, qty: qtyVal, unit: unitVal, vendor: vendorName });
-        document.getElementById("cart-count").textContent = cartCount;
-        updateCartDropdown();
-
-        // Reset radio selection
-        selected.checked = false;
-
-        // Confirmation message
-        const msg = document.createElement('div');
-        msg.textContent = "Added to cart!";
-        msg.style.color = "green";
-        msg.style.fontSize = "12px";
-        vendorContainer.appendChild(msg);
-        setTimeout(() => msg.remove(), 1500);
-    };
-}
-
-// Update cart dropdown
-function updateCartDropdown() {
-    const cartList = document.getElementById("cart-items");
-    cartList.innerHTML = "";
-
-    let totalItems = 0;
-    let totalAmount = 0;
-
-    cartItems.forEach(item => {
-        totalItems += parseFloat(item.qty);
-        const product = products.find(p => p.name === item.name);
-        const vendor = product.vendors.find(v => v.name === item.vendor);
-        const itemTotal = vendor.price * item.qty;
-        totalAmount += itemTotal;
-
-        const li = document.createElement("li");
-        li.textContent = `${item.name} - ${item.qty} ${item.unit} | Vendor: ${item.vendor} | Total: KES ${itemTotal}`;
-        cartList.appendChild(li);
-    });
-
-    // Summary
-    const summary = document.createElement("li");
-    summary.innerHTML = `<strong>Total Products: ${totalItems}</strong> | <strong>Total Amount: KES ${totalAmount}</strong>`;
-    summary.style.borderBottom = "1px solid #ccc";
-    summary.style.paddingBottom = "5px";
-    cartList.prepend(summary);
-}
-
-// Toggle cart dropdown
-document.getElementById("cart-btn").addEventListener("click", () => {
-    const dropdown = document.getElementById("cart-dropdown");
-    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-});
-
-// Search filter
-searchInput.addEventListener("input", e => {
-    const query = e.target.value.toLowerCase();
-    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-    renderProducts(filtered);
-});
-
-// Sort toggle
-sortBtn.addEventListener("click", () => {
-    const sorted = [...products].sort((a, b) => {
-        const priceA = Math.min(...a.vendors.map(v => v.price));
-        const priceB = Math.min(...b.vendors.map(v => v.price));
-        return sortedASC ? priceA - priceB : priceB - priceA;
-    });
-    sortedASC = !sortedASC;
-    renderProducts(sorted);
-});
-
-// Dark mode toggle
-darkModeToggle.addEventListener("change", e => {
-    document.body.classList.toggle("dark", e.target.checked);
-});
-
-// Navbar alerts
-document.getElementById('signupBtn').addEventListener("click", () => alert("Signup feature coming soon!"));
-document.getElementById('categoriesBtn').addEventListener("click", () => alert("Categories feature coming soon!"));
-document.getElementById('contactBtn').addEventListener("click", () => alert("Contact Us feature coming soon!"));
-
-fetchProducts();
-
-document.getElementById("getLocationBtn").addEventListener("click", () => {
-    const display = document.getElementById("locationDisplay");
-
-    if (!navigator.geolocation) {
-        display.textContent = "Geolocation is not supported by your browser.";
-        return;
-    }
-
-    display.textContent = "Locating…";
-
+// Get user location
+function getUserLocation(callback) {
+  if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-        (position) => {
-            const latitude = position.coords.latitude.toFixed(6);
-            const longitude = position.coords.longitude.toFixed(6);
-            display.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
-        },
-        (error) => {
-            switch(error.code) {
-                case error.PERMISSION_DENIED:
-                    display.textContent = "User denied the request for Geolocation.";
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    display.textContent = "Location information is unavailable.";
-                    break;
-                case error.TIMEOUT:
-                    display.textContent = "The request to get user location timed out.";
-                    break;
-                default:
-                    display.textContent = "An unknown error occurred.";
-            }
-        }
+      (position) => {
+        callback(position.coords.latitude, position.coords.longitude);
+      },
+      (error) => {
+        console.error("Geolocation error:", error.message);
+        alert("Please enable location to see nearest vendors.");
+        callback(null, null);
+      }
     );
+  } else {
+    alert("Geolocation not supported in this browser.");
+    callback(null, null);
+  }
+}
+
+// Calculate distance (Haversine formula)
+function getDistance(lat1, lng1, lat2, lng2) {
+  const R = 6371; // Earth radius in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+}
+
+function findNearestVendor(userLat, userLng, vendors) {
+  let nearest = null;
+  let minDist = Infinity;
+
+  vendors.forEach(v => {
+    if (v.lat && v.lng) {
+      const dist = getDistance(userLat, userLng, v.lat, v.lng);
+      if (dist < minDist) {
+        minDist = dist;
+        nearest = { ...v, distance: dist };
+      }
+    }
+  });
+  return nearest;
+}
+
+/* ----------------- VENDOR PANEL ------------------- */
+
+function showVendors(product) {
+  vendorContent.innerHTML = "<p>Loading vendors...</p>";
+
+  getUserLocation((userLat, userLng) => {
+    vendorContent.innerHTML = "";
+
+    product.vendors.forEach(vendor => {
+      let distanceText = "";
+      if (userLat && userLng) {
+        const dist = getDistance(userLat, userLng, vendor.lat, vendor.lng).toFixed(2);
+        distanceText = ` | ${dist} km away`;
+      }
+
+      const vendorDiv = document.createElement("div");
+      vendorDiv.className = "vendor";
+      vendorDiv.innerHTML = `
+        <p><strong>${vendor.name}</strong> - KES ${vendor.price}${distanceText}</p>
+        <input type="number" min="1" value="1" class="qty-input">
+        <div class="unit-buttons">
+          <button class="unit-btn" data-unit="pcs">Pieces</button>
+          <button class="unit-btn" data-unit="kg">Kgs</button>
+        </div>
+        <button class="add-cart-btn">Add to Cart</button>
+      `;
+
+      // Add to cart event
+      vendorDiv.querySelector(".add-cart-btn").addEventListener("click", () => {
+        const qty = parseFloat(vendorDiv.querySelector(".qty-input").value) || 1;
+        const unit = vendorDiv.querySelector(".unit-btn.active")?.dataset.unit || "pcs";
+
+        cartItems.push({
+          product: product.name,
+          vendor: vendor.name,
+          price: vendor.price,
+          qty,
+          unit
+        });
+        cartCount++;
+        updateCart();
+      });
+
+      // Unit selection buttons
+      vendorDiv.querySelectorAll(".unit-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          vendorDiv.querySelectorAll(".unit-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+        });
+      });
+
+      vendorContent.appendChild(vendorDiv);
+    });
+
+    // Highlight nearest vendor
+    if (userLat && userLng) {
+      const nearest = findNearestVendor(userLat, userLng, product.vendors);
+      if (nearest) {
+        const vendorDivs = vendorContent.querySelectorAll(".vendor");
+        vendorDivs.forEach(div => {
+          if (div.textContent.includes(nearest.name)) {
+            div.style.background = "#c8facc";
+          }
+        });
+      }
+    }
+  });
+
+  vendorPanel.classList.add("open");
+}
+
+closeVendorBtn.addEventListener("click", () => {
+  vendorPanel.classList.remove("open");
 });
+
+/* ----------------- CART ------------------- */
+
+function updateCart() {
+  document.getElementById("cart-count").textContent = cartCount;
+  cartList.innerHTML = "";
+
+  let total = 0;
+
+  cartItems.forEach(item => {
+    const itemTotal = item.price * item.qty;
+    total += itemTotal;
+
+    const li = document.createElement("li");
+    li.textContent = `${item.product} - ${item.qty} ${item.unit} | ${item.vendor} | KES ${itemTotal}`;
+    cartList.appendChild(li);
+  });
+
+  const summary = document.createElement("li");
+  summary.innerHTML = `<strong>Total: KES ${total}</strong>`;
+  summary.style.borderTop = "1px solid #ccc";
+  summary.style.paddingTop = "5px";
+  cartList.appendChild(summary);
+}
+
+cartBtn.addEventListener("click", () => {
+  cartDropdown.style.display = cartDropdown.style.display === "block" ? "none" : "block";
+});
+
+/* ----------------- INIT ------------------- */
+fetchProducts();
+/* ----------------- HERO SLIDER ------------------- */
+const heroSlidesContainer = document.getElementById("heroSlides");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+
+const heroImages = [
+  { src: "images/Tomato_je.jpg", name: "Tomatoes" },
+  { src: "images/potatoes.PNG", name: "Potatoes" },
+  { src: "images/RedOnion.PNG", name: "Onions" },
+  { src: "images/grapes.PNG", name: "Grapes" },
+  { src: "images/cabbage.PNG", name: "Cabbage" },
+  { src: "images/Collard-Greens-Bundle.jpg", name: "Kales (Sukuma Wiki)" },
+  { src: "images/mangoes.PNG", name: "Mangoes" }
+];
+
+// Render slides
+heroSlidesContainer.innerHTML = heroImages.map((img, i) => `
+  <div class="slide ${i === 0 ? "active" : ""}">
+    <img src="${img.src}" alt="${img.name}">
+    <div class="hero-text"><h2>${img.name}</h2></div>
+  </div>
+`).join("");
+
+let slideIndex = 0;
+const slides = document.querySelectorAll(".slide");
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.style.display = i === index ? "block" : "none";
+  });
+}
+
+// Navigation
+function nextSlide() {
+  slideIndex = (slideIndex + 1) % slides.length;
+  showSlide(slideIndex);
+}
+function prevSlide() {
+  slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+  showSlide(slideIndex);
+}
+
+nextBtn.addEventListener("click", nextSlide);
+prevBtn.addEventListener("click", prevSlide);
+
+// Auto slide every 5s
+setInterval(nextSlide, 5000);
+
+// Show first slide
+showSlide(slideIndex);
