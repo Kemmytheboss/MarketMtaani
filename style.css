@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background: #f9f9f9;
   color: #333;
 }
@@ -17,7 +17,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background: green;
-  color: white;
+  color: #ffffff;
   padding: 10px 20px;
 }
 
@@ -42,7 +42,7 @@ body {
 }
 
 .card {
-  background: white;
+  background: #ffffff;
   border: 1px solid #ddd;
   border-radius: 6px;
   padding: 10px;
@@ -60,15 +60,6 @@ body {
   font-size: 16px;
 }
 
-.card button {
-  margin-top: 5px;
-  background: green;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  cursor: pointer;
-}
-
 /* Vendor Side Panel */
 #vendor-panel {
   position: fixed;
@@ -76,9 +67,9 @@ body {
   right: -400px; /* Hidden by default */
   width: 350px;
   height: 100%;
-  background-color: #006400; /* Deep green */
+  background-color: #305630; /* Deep green */
   color: #fff;
-  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: -4px 0 10px #0000004d;
   transition: right 0.3s ease-in-out;
   padding: 20px;
   z-index: 1000;
@@ -102,7 +93,7 @@ body {
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff1a;
 }
 
 #vendor-panel label {
@@ -139,7 +130,7 @@ body {
   position: absolute;
   right: 20px;
   top: 60px;
-  background: white;
+  background: #ffffff;
   border: 1px solid #ddd;
   width: 300px;
   max-height: 400px;
@@ -150,8 +141,8 @@ body {
 
 /* Footer */
 .footer {
-  background: green;
-  color: white;
+  background: #008000;
+  color: #ffffff;
   padding: 20px;
   text-align: center;
 }
@@ -173,7 +164,7 @@ button {
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px #00000033;
 }
 
 /* Hover effect */
@@ -233,7 +224,7 @@ button:disabled {
 
 .intro-content h1 {
   font-size: 2.8rem;
-  color: green;
+  color: #008000;
   margin-bottom: 15px;
 }
 
@@ -253,14 +244,14 @@ button:disabled {
 }
 
 .btn.primary {
-  background: green;
-  color: white;
+  background: #008000;
+  color: #ffffff;
 }
 
 .btn.secondary {
-  background: white;
-  color: green;
-  border: 1px solid green;
+  background: #ffffff;
+  color: #008000;
+  border: 1px solid #008000;
 }
 
 .intro-image {
