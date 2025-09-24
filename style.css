@@ -207,6 +207,28 @@ button:disabled {
   margin-top: 8px;
 }
 
+.unit-buttons {
+  display: flex;
+  gap: 8px;        /* space between buttons */
+  margin: 5px 0;
+}
+
+.unit-buttons .unit-btn {
+  flex: 1;          /* make them equal size */
+  padding: 6px 10px;
+  border: 1px solid #28a745;
+  background: #fff;
+  color: #28a745;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.unit-buttons .unit-btn.active {
+  background: #28a745;
+  color: #fff;
+}
+
 .intro {
   display: flex;
   align-items: center;

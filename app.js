@@ -8,7 +8,6 @@ const closeVendorBtn = document.getElementById("close-vendor");
 
 let products = [];
 let cartItems = [];
-let cartCount = 0;
 
 // Fetch products from db.json
 async function fetchProducts() {
@@ -44,10 +43,10 @@ function renderProducts(data) {
 function getUserLocation(callback) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      position => {
         callback(position.coords.latitude, position.coords.longitude);
       },
-      (error) => {
+      error => {
         console.error("Geolocation error:", error.message);
         alert("Please enable location to see nearest vendors.");
         callback(null, null);
@@ -65,9 +64,9 @@ function getDistance(lat1, lng1, lat2, lng2) {
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLng = (lng2 - lng1) * Math.PI / 180;
   const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.sin(dLat / 2) ** 2 +
     Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    Math.sin(dLng / 2) ** 2;
   return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
 }
 
@@ -126,7 +125,6 @@ function showVendors(product) {
           qty,
           unit
         });
-        cartCount++;
         updateCart();
       });
 
@@ -165,26 +163,46 @@ closeVendorBtn.addEventListener("click", () => {
 /* ----------------- CART ------------------- */
 
 function updateCart() {
-  document.getElementById("cart-count").textContent = cartCount;
+  // Update count by actual cart length
+  document.getElementById("cart-count").textContent = cartItems.length;
   cartList.innerHTML = "";
 
   let total = 0;
 
-  cartItems.forEach(item => {
+  if (cartItems.length === 0) {
+    const emptyMsg = document.createElement("li");
+    emptyMsg.textContent = "Your cart is empty.";
+    cartList.appendChild(emptyMsg);
+    return; // stop here if no items
+  }
+
+  cartItems.forEach((item, index) => {
     const itemTotal = item.price * item.qty;
     total += itemTotal;
 
     const li = document.createElement("li");
-    li.textContent = `${item.product} - ${item.qty} ${item.unit} | ${item.vendor} | KES ${itemTotal}`;
+    li.innerHTML = `
+      ${item.product} - ${item.qty} ${item.unit} | ${item.vendor} | KES ${itemTotal}
+      <button class="remove-btn" data-index="${index}">❌</button>
+    `;
+
+    // remove item on click
+    li.querySelector(".remove-btn").addEventListener("click", () => {
+      cartItems.splice(index, 1);
+      updateCart();
+    });
+
     cartList.appendChild(li);
   });
 
+  // add total summary
   const summary = document.createElement("li");
   summary.innerHTML = `<strong>Total: KES ${total}</strong>`;
   summary.style.borderTop = "1px solid #ccc";
   summary.style.paddingTop = "5px";
   cartList.appendChild(summary);
 }
+
 
 cartBtn.addEventListener("click", () => {
   cartDropdown.style.display = cartDropdown.style.display === "block" ? "none" : "block";
