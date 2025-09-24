@@ -5,9 +5,9 @@
       "name": "Tomatoes",
       "image": "images/Tomato_je.jpg",
       "vendors": [
-        { "id": 1, "name": "Mama Aisha", "price": 120 },
-        { "id": 2, "name": "Mama Njeri", "price": 100 },
-        { "id": 3, "name": "Mama Wanjiru", "price": 110 }
+        { "id": 1, "name": "Mama Aisha", "price": 120, "lat": -1.2921, "lng": 36.8219 },
+        { "id": 2, "name": "Mama Njeri", "price": 100, "lat": -1.3000, "lng": 36.8200 },
+        { "id": 3, "name": "Mama Wanjiru", "price": 110, "lat": -1.2950, "lng": 36.8250 }
       ]
     },
     {
@@ -15,8 +15,8 @@
       "name": "Onions",
       "image": "images/RedOnion.PNG",
       "vendors": [
-        { "id": 1, "name": "Mama Aisha", "price": 200 },
-        { "id": 2, "name": "Mama Njeri", "price": 180 }
+        { "id": 1, "name": "Mama Aisha", "price": 200, "lat": -1.2921, "lng": 36.8219 },
+        { "id": 2, "name": "Mama Njeri", "price": 180, "lat": -1.3000, "lng": 36.8200 }
       ]
     },
     {
@@ -24,38 +24,37 @@
       "name": "Kales (Sukuma Wiki)",
       "image": "images/Collard-Greens-Bundle.jpg",
       "vendors": [
-        { "id": 1, "name": "Mama Wanjiru", "price": 50 },
-        { "id": 2, "name": "Mama Aisha", "price": 45 }
+        { "id": 1, "name": "Mama Wanjiru", "price": 50, "lat": -1.2950, "lng": 36.8250 },
+        { "id": 2, "name": "Mama Aisha", "price": 45, "lat": -1.2921, "lng": 36.8219 }
       ]
     },
-     {
+    {
       "id": 4,
-      "name": "Grapes (Grapes)",
+      "name": "Grapes",
       "image": "images/grapes.PNG",
       "vendors": [
-        { "id": 1, "name": "Mama Wanjiru", "price": 350 },
-        { "id": 2, "name": "Mama Aisha", "price": 450 },
-         {"id": 3, "name" : "Mama Moraa", "price" : 380}
+        { "id": 1, "name": "Mama Wanjiru", "price": 350, "lat": -1.2950, "lng": 36.8250 },
+        { "id": 2, "name": "Mama Aisha", "price": 450, "lat": -1.2921, "lng": 36.8219 },
+        { "id": 3, "name": "Mama Moraa", "price": 380, "lat": -1.2980, "lng": 36.8220 }
       ]
     },
-
-     {
+    {
       "id": 5,
-      "name": "Mangoes (Mangoes)",
+      "name": "Mangoes",
       "image": "images/mangoes.PNG",
       "vendors": [
-        { "id": 1, "name": "Mama Kerubo", "price": 20 },
-        { "id": 2, "name": "Mama John", "price": 25 }
+        { "id": 1, "name": "Mama Kerubo", "price": 20, "lat": -1.3050, "lng": 36.8200 },
+        { "id": 2, "name": "Mama John", "price": 25, "lat": -1.3070, "lng": 36.8230 }
       ]
     },
-     {
+    {
       "id": 6,
       "name": "Potatoes",
       "image": "images/potatoes.PNG",
       "vendors": [
-        { "name": "Mama Mboga A", "price": 120 },
-        { "name": "Mama Mboga B", "price": 130 },
-        { "name": "Mama Mboga C", "price": 115 }
+        { "id": 1, "name": "Mama Mboga A", "price": 120, "lat": -1.3100, "lng": 36.8250 },
+        { "id": 2, "name": "Mama Mboga B", "price": 130, "lat": -1.3120, "lng": 36.8260 },
+        { "id": 3, "name": "Mama Mboga C", "price": 115, "lat": -1.3140, "lng": 36.8270 }
       ]
     },
     {
@@ -63,9 +62,9 @@
       "name": "Carrots",
       "image": "images/carrots.PNG",
       "vendors": [
-        { "name": "Mama Mboga A", "price": 60 },
-        { "name": "Mama Mboga B", "price": 58 },
-        { "name": "Mama Mboga C", "price": 62 }
+        { "id": 1, "name": "Mama Mboga A", "price": 60, "lat": -1.3100, "lng": 36.8250 },
+        { "id": 2, "name": "Mama Mboga B", "price": 58, "lat": -1.3120, "lng": 36.8260 },
+        { "id": 3, "name": "Mama Mboga C", "price": 62, "lat": -1.3140, "lng": 36.8270 }
       ]
     },
     {
@@ -73,9 +72,9 @@
       "name": "Cabbage",
       "image": "images/cabbage.PNG",
       "vendors": [
-        { "name": "Mama Mboga A", "price": 40 },
-        { "name": "Mama Mboga B", "price": 42 },
-        { "name": "Mama Mboga C", "price": 38 }
+        { "id": 1, "name": "Mama Mboga A", "price": 40, "lat": -1.3100, "lng": 36.8250 },
+        { "id": 2, "name": "Mama Mboga B", "price": 42, "lat": -1.3120, "lng": 36.8260 },
+        { "id": 3, "name": "Mama Mboga C", "price": 38, "lat": -1.3140, "lng": 36.8270 }
       ]
     }
   ]
