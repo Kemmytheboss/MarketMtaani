@@ -231,3 +231,21 @@ cartBtn.addEventListener("click", () => {
 
 /* ----------------- INIT ------------------- */
 fetchProducts();
+
+// ----------------- INTRO BUTTONS -------------------
+const shopNowBtn = document.getElementById("shop-now-btn");
+const viewVendorsBtn = document.getElementById("view-vendors-btn");
+
+// Shop Now scrolls to product list
+shopNowBtn.addEventListener("click", () => {
+  document.getElementById("products-section").scrollIntoView({ behavior: "smooth" });
+});
+
+// View Vendors scrolls to vendor panel (but only after selecting a product)
+viewVendorsBtn.addEventListener("click", () => {
+  if (vendorPanel.classList.contains("open")) {
+    vendorPanel.scrollIntoView({ behavior: "smooth" });
+  } else {
+    alert("Please select a product first to view vendors.");
+  }
+});
