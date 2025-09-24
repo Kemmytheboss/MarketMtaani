@@ -5,6 +5,13 @@ const cartDropdown = document.getElementById("cart-dropdown");
 const vendorPanel = document.getElementById("vendor-panel");
 const vendorContent = document.getElementById("vendor-content");
 const closeVendorBtn = document.getElementById("close-vendor");
+const signupBtn = document.getElementById("signup-btn");
+const loginBtn = document.getElementById("login-btn");
+const logoutBtn = document.getElementById("logout-btn");
+const authModal = document.getElementById("auth-modal");
+const authTitle = document.getElementById("auth-title");
+const authForm = document.getElementById("auth-form");
+const closeAuth = document.getElementById("close-auth");
 
 let products = [];
 let cartItems = [];
@@ -234,18 +241,83 @@ fetchProducts();
 
 // ----------------- INTRO BUTTONS -------------------
 const shopNowBtn = document.getElementById("shop-now-btn");
-const viewVendorsBtn = document.getElementById("view-vendors-btn");
 
 // Shop Now scrolls to product list
 shopNowBtn.addEventListener("click", () => {
   document.getElementById("products-section").scrollIntoView({ behavior: "smooth" });
 });
 
-// View Vendors scrolls to vendor panel (but only after selecting a product)
-viewVendorsBtn.addEventListener("click", () => {
-  if (vendorPanel.classList.contains("open")) {
-    vendorPanel.scrollIntoView({ behavior: "smooth" });
-  } else {
-    alert("Please select a product first to view vendors.");
+const API_URL = "http://localhost:3000/users"; // adjust if different
+
+authForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const username = document.getElementById("auth-username").value.trim();
+  const password = document.getElementById("auth-password").value.trim();
+
+  if (authTitle.textContent === "Signup") {
+    // Check if user already exists
+    const res = await fetch(`${API_URL}?username=${username}`);
+    const existing = await res.json();
+    if (existing.length > 0) {
+      alert("User already exists! Try logging in.");
+      return;
+    }
+
+    // Save new user
+    await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+
+    alert("Signup successful! You can now log in.");
+    authModal.style.display = "none";
+    authForm.reset();
+
+  } else if (authTitle.textContent === "Login") {
+    // Verify user
+    const res = await fetch(`${API_URL}?username=${username}&password=${password}`);
+    const users = await res.json();
+
+    if (users.length > 0) {
+      alert(`Login successful! Welcome, ${username}.`);
+      localStorage.setItem("loggedInUser", username); // store session
+      authModal.style.display = "none";
+      authForm.reset();
+      updateHeaderUser(username);
+    } else {
+      alert("Invalid credentials. Try again.");
+    }
   }
+});
+
+// Show logged in user in header
+function updateHeaderUser(username) {
+  const header = document.querySelector(".header");
+  let userSpan = document.getElementById("user-info");
+  if (!userSpan) {
+    userSpan = document.createElement("span");
+    userSpan.id = "user-info";
+    userSpan.style.marginLeft = "10px";
+    userSpan.style.color = "green";
+    header.appendChild(userSpan);
+  }
+  userSpan.textContent = `👤 ${username}`;
+}
+
+// Open modal for signup
+signupBtn.addEventListener("click", () => {
+  authTitle.textContent = "Signup";
+  authModal.style.display = "block";
+});
+
+// Open modal for login
+loginBtn.addEventListener("click", () => {
+  authTitle.textContent = "Login";
+  authModal.style.display = "block";
+});
+
+// Close modal
+closeAuth.addEventListener("click", () => {
+  authModal.style.display = "none";
 });

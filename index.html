@@ -14,6 +14,8 @@
   <input type="text" id="search" placeholder="Search products...">
   <button id="categoriesBtn">Categories</button>
   <button id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+  <button id="signup-btn">Signup</button>
+  <button id="login-btn">Login</button>
 </header>
 
 <!-- intro section -->
@@ -23,9 +25,9 @@
     <p>Your one-stop marketplace for fresh farm produce directly from local vendors.</p>
     <div class="intro-actions">
       <button class="btn primary" id="shop-now-btn">Shop Now</button>
-      <button class="btn secondary" id="view-vendors-btn">View Vendors</button>
     </div>
   </div>
+  
   <div class="intro-image">
     <img src="images/logo.PNG" alt="Fresh produce market">
   </div>
@@ -46,6 +48,19 @@
 <!-- Cart Dropdown -->
 <div id="cart-dropdown">
   <ul id="cart-items"></ul>
+</div>
+
+<!-- Signup/Login Modal -->
+<div id="auth-modal" class="modal" style="display: none;">
+  <div class="auth-content">
+    <h2 id="auth-title">Login</h2>
+    <form id="auth-form">
+      <input type="text" id="auth-username" placeholder="Username" required>
+      <input type="password" id="auth-password" placeholder="Password" required>
+      <button type="submit" class="btn primary">Submit</button>
+    </form>
+    <button id="close-auth">Close</button>
+  </div>
 </div>
 
 <footer class="footer">
