@@ -4,69 +4,51 @@
       "id": 1,
       "name": "Tomatoes",
       "image": "images/Tomato_je.jpg",
+      "description": "Fresh red tomatoes.",
       "vendors": [
-        { 
-          "id": 1, 
-          "name": "Mama Aisha", 
-          "prices": { "pcs": 10, "kg": 120 }, 
-          "lat": -1.2921, 
-          "lng": 36.8219 
+        {
+          "id": 1,
+          "name": "Mama Mboga A",
+          "lat": -1.2921,
+          "lng": 36.8219,
+          "prices": { "pcs": 5, "kg": 120 }
         },
-        { 
-          "id": 2, 
-          "name": "Mama Njeri", 
-          "prices": { "pcs": 8, "kg": 100 }, 
-          "lat": -1.3000, 
-          "lng": 36.8200 
-        },
-        { 
-          "id": 3, 
-          "name": "Mama Wanjiru", 
-          "prices": { "pcs": 9, "kg": 110 }, 
-          "lat": -1.2950, 
-          "lng": 36.8250 
+        {
+          "id": 2,
+          "name": "Vendor B",
+          "lat": -1.3001,
+          "lng": 36.8300,
+          "prices": { "pcs": 6, "kg": 130 }
         }
       ]
     },
     {
       "id": 2,
-      "name": "Onions",
-      "image": "images/RedOnion.PNG",
+      "name": "Potatoes",
+      "image": "images/potatoes.PNG",
+      "description": "Organic farm potatoes.",
       "vendors": [
-        { 
-          "id": 1, 
-          "name": "Mama Aisha", 
-          "prices": { "pcs": 15, "kg": 200 }, 
-          "lat": -1.2921, 
-          "lng": 36.8219 
-        },
-        { 
-          "id": 2, 
-          "name": "Mama Njeri", 
-          "prices": { "pcs": 12, "kg": 180 }, 
-          "lat": -1.3000, 
-          "lng": 36.8200 
+        {
+          "id": 1,
+          "name": "Mama Mboga C",
+          "lat": -1.3100,
+          "lng": 36.8210,
+          "prices": { "pcs": 15, "kg": 80 }
         }
       ]
     },
     {
       "id": 3,
-      "name": "Kales (Sukuma Wiki)",
-      "image": "images/Collard-Greens-Bundle.jpg",
+      "name": "Onions",
+      "image": "images/RedOnion.PNG",
+      "description": "Strong flavored onions.",
       "vendors": [
-        { 
-          "id": 1, 
-          "name": "Mama Wanjiru", 
-          "prices": { "bundle": 50, "kg": 80 }, 
-          "lat": -1.2950, 
-          "lng": 36.8250 
-        },
-        { 
-          "id": 2, 
-          "name": "Mama Aisha", 
-          "prices": { "bundle": 45, "kg": 75 }, 
-          "lat": -1.2921, 
-          "lng": 36.8219 
+        {
+          "id": 1,
+          "name": "Vendor D",
+          "lat": -1.2950,
+          "lng": 36.8100,
+          "prices": { "pcs": 10, "kg": 100 }
         }
       ]
     },
@@ -74,27 +56,74 @@
       "id": 4,
       "name": "Grapes",
       "image": "images/grapes.PNG",
+      "description": "Sweet seedless grapes.",
       "vendors": [
-        { 
-          "id": 1, 
-          "name": "Mama Wanjiru", 
-          "prices": { "kg": 350 }, 
-          "lat": -1.2950, 
-          "lng": 36.8250 
-        },
-        { 
-          "id": 2, 
-          "name": "Mama Aisha", 
-          "prices": { "kg": 450 }, 
-          "lat": -1.2921, 
-          "lng": 36.8219 
-        },
-        { 
-          "id": 3, 
-          "name": "Mama Moraa", 
-          "prices": { "kg": 380 }, 
-          "lat": -1.2980, 
-          "lng": 36.8220 
+        {
+          "id": 1,
+          "name": "Fruit Vendor A",
+          "lat": -1.2999,
+          "lng": 36.8120,
+          "prices": { "pcs": 25, "kg": 300 }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Cabbage",
+      "image": "images/cabbage.PNG",
+      "description": "Big and fresh cabbages.",
+      "vendors": [
+        {
+          "id": 1,
+          "name": "Mama Mboga E",
+          "lat": -1.3050,
+          "lng": 36.8225,
+          "prices": { "pcs": 40, "kg": 60 }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Kales",
+      "image": "images/Collard-Greens-Bundle.jpg",
+      "description": "Healthy sukuma wiki.",
+      "vendors": [
+        {
+          "id": 1,
+          "name": "Vendor F",
+          "lat": -1.2980,
+          "lng": 36.8290,
+          "prices": { "pcs": 10, "kg": 50 }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Mangoes",
+      "image": "images/mangoes.PNG",
+      "description": "Juicy ripe mangoes.",
+      "vendors": [
+        {
+          "id": 1,
+          "name": "Fruit Vendor B",
+          "lat": -1.2905,
+          "lng": 36.8260,
+          "prices": { "pcs": 30, "kg": 150 }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Carrots",
+      "image": "images/carrots.PNG",
+      "description": "Crunchy orange carrots.",
+      "vendors": [
+        {
+          "id": 1,
+          "name": "Vendor G",
+          "lat": -1.3020,
+          "lng": 36.8180,
+          "prices": { "pcs": 5, "kg": 90 }
         }
       ]
     }
