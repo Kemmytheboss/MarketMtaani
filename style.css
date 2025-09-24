@@ -270,7 +270,14 @@ button:disabled {
   color: #ffffff;
 }
 
-.btn.secondary {
+#categoriesBtn, #cart-btn {
+  
+  background: #ffffff;
+  color: #008000;
+  border: 1px solid #008000;
+}
+
+.btn.secondary  {
   background: #ffffff;
   color: #008000;
   border: 1px solid #008000;
