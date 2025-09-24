@@ -1,66 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MarketMtaani</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MarketMtaani</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="logo">MarketMtaani</div>
-    <input type="text" id="search" placeholder="Search products...">
-    <button id="categoriesBtn">Categories</button>
-    <button id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
-  </header>
+<!-- Header -->
+<header class="header">
+  <div class="logo">MarketMtaani</div>
+  <input type="text" id="search" placeholder="Search products...">
+  <button id="categoriesBtn">Categories</button>
+  <button id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+</header>
 
-<!-- HERO SLIDER -->
-<section id="hero">
-  <div class="slider">
-    <div class="slides" id="heroSlides"></div>
-    <button class="prev">&#10094;</button>
-    <button class="next">&#10095;</button>
+<!-- Hero Slider -->
+<!-- <section id="hero">
+  <button class="prev">&#10094;</button>
+  <div class="hero-slider"></div>
+  <button class="next">&#10095;</button>
+</section> -->
+
+<section class="intro">
+  <div class="intro-content">
+    <h1>Welcome to MarketMtaani</h1>
+    <p>Your one-stop marketplace for fresh farm produce directly from local vendors.</p>
+    <div class="intro-actions">
+      <button class="btn primary">Shop Now</button>
+      <button class="btn secondary">View Vendors</button>
+    </div>
+  </div>
+  <div class="intro-image">
+    <img src="images/logo.PNG" alt="Fresh produce market">
   </div>
 </section>
 
-  <!-- Products Section -->
-  <main id="products-section">
-    <div id="product-list" class="product-grid"></div>
-  </main>
+<!-- Products Section -->
+<main id="products-section">
+  <div id="product-list" class="product-grid"></div>
+</main>
 
-  <!-- Vendor Side Panel -->
-  <aside id="vendor-panel">
-    <h3>Vendor Options</h3>
-    <div id="vendor-content"></div>
-    <button id="close-vendor">Close</button>
-  </aside>
+<!-- Vendor Side Panel -->
+<aside id="vendor-panel">
+  <h3>Vendor Options</h3>
+  <div id="vendor-content"></div>
+  <button id="close-vendor">Close</button>
+</aside>
 
-  <!-- Cart Dropdown -->
-  <div id="cart-dropdown">
-    <ul id="cart-items"></ul>
-  </div>
+<!-- Cart Dropdown -->
+<div id="cart-dropdown">
+  <ul id="cart-items"></ul>
+</div>
 
-  <!-- Footer -->
-  <footer class="footer">
+<footer class="footer">
     <div class="footer-content">
-      <div class="footer-socials">
-        <a href="https://www.facebook.com" target="_blank"><img src="images/facebook.PNG" alt="Facebook"></a>
-        <a href="https://www.instagram.com" target="_blank"><img src="images/instagram.PNG" alt="Instagram"></a>
-        <a href="https://www.tiktok.com" target="_blank"><img src="images/tiktok.PNG" alt="TikTok"></a>
-        <a href="https://www.twitter.com" target="_blank"><img src="images/twitter.PNG" alt="Twitter"></a>
-        <a href="https://www.youtube.com" target="_blank"><img src="images/youtube.PNG" alt="Youtube"></a>
-      </div>
-      <div class="footer-contact">
-        <p>Phone: +254 715 516 994</p>
-      </div>
-      <div class="footer-copy">
-        <p>&copy; <em>2025 MarketMtaani. All rights reserved.</em></p>
-      </div>
-    </div>
-  </footer>
+        <div class="footer-socials">
+            <a href="https://www.facebook.com" target="_blank"><img src="images/facebook.PNG" alt="Facebook"></a>
+            <a href="https://www.instagram.com" target="_blank"><img src="images/instagram.PNG" alt="Instagram"></a>
+            <a href="https://www.tiktok.com" target="_blank"><img src="images/tiktok.PNG" alt="TikTok"></a>
+            <a href="https://www.twitter.com" target="_blank"><img src="images/twitter.PNG" alt="Twitter"></a>
+            <a href="https://www.youtube.com" target="_blank"><img src="images/youtube.PNG" alt="Youtube"></a>
 
-  <script src="app.js"></script>
+        </div>
+        <div class="footer-contact">
+            <p>Phone: +254 715 516 994</p>
+        </div>
+        <div class="footer-copy">
+            <p>&copy; <em>2025 MarketMtaani. All rights reserved.</em></p>
+        </div>
+    </div>
+</footer>
+
+
+<script src="app.js"></script>
+
 </body>
 </html>

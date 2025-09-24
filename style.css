@@ -256,3 +256,62 @@ button:disabled {
   width: 100%;
   margin-top: 8px;
 }
+
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 10%;
+  background: #f5fff5; /* light green background */
+  flex-wrap: wrap;
+}
+
+.intro-content {
+  flex: 1;
+  min-width: 300px;
+  padding-right: 20px;
+}
+
+.intro-content h1 {
+  font-size: 2.8rem;
+  color: green;
+  margin-bottom: 15px;
+}
+
+.intro-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.intro-actions .btn {
+  padding: 12px 25px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn.primary {
+  background: green;
+  color: white;
+}
+
+.btn.secondary {
+  background: white;
+  color: green;
+  border: 1px solid green;
+}
+
+.intro-image {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.intro-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+}
