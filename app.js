@@ -5,13 +5,13 @@ const cartDropdown = document.getElementById("cart-dropdown");
 const vendorPanel = document.getElementById("vendor-panel");
 const vendorContent = document.getElementById("vendor-content");
 const closeVendorBtn = document.getElementById("close-vendor");
-const signupBtn = document.getElementById("signup-btn");
-const loginBtn = document.getElementById("login-btn");
-const logoutBtn = document.getElementById("logout-btn");
-const authModal = document.getElementById("auth-modal");
-const authTitle = document.getElementById("auth-title");
-const authForm = document.getElementById("auth-form");
-const closeAuth = document.getElementById("close-auth");
+// const signupBtn = document.getElementById("signup-btn");
+// const loginBtn = document.getElementById("login-btn");
+// const logoutBtn = document.getElementById("logout-btn");
+// const authModal = document.getElementById("auth-modal");
+// const authTitle = document.getElementById("auth-title");
+// const authForm = document.getElementById("auth-form");
+// const closeAuth = document.getElementById("close-auth");
 const darkModeBtn = document.getElementById("dark-mode-toggle");
 
 let products = [];
@@ -265,3 +265,4 @@ darkModeBtn.addEventListener("click", () => {
     darkModeBtn.textContent = "🌙 Dark Mode";
   }
 });
+
