@@ -22,16 +22,55 @@ let products = [];
 let cartItems = [];
 let isLoggedIn = false;
 
-// ================= FETCH PRODUCTS =================
-async function fetchProducts() {
+const API_URL = "http://localhost:3000"; // JSON server root
+
+// ================= API HELPER =================
+async function apiRequest(endpoint, method = "GET", body = null) {
   try {
-    const res = await fetch("http://localhost:3000/products");
-    products = await res.json();
-    renderProducts(products);
+    const options = { method, headers: { "Content-Type": "application/json" } };
+    if (body) options.body = JSON.stringify(body);
+
+    const res = await fetch(`${API_URL}${endpoint}`, options);
+    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+    // For DELETE, JSON-server returns empty, so skip parsing
+    return method === "DELETE" ? {} : await res.json();
   } catch (err) {
-    console.error("Failed to fetch products:", err);
-    alert("Failed to load products. Check your JSON server.");
+    console.error(`${method} ${endpoint} failed:`, err);
+    alert(`${method} request failed. See console for details.`);
   }
+}
+
+// ================= CRUD =================
+// GET products
+async function fetchProducts() {
+  products = await apiRequest("/products", "GET");
+  if (products) renderProducts(products);
+}
+
+// POST new product
+async function addProduct(product) {
+  const newProduct = await apiRequest("/products", "POST", product);
+  if (newProduct) {
+    products.push(newProduct);
+    renderProducts(products);
+  }
+}
+
+// PATCH update product
+async function updateProduct(id, updates) {
+  const updated = await apiRequest(`/products/${id}`, "PATCH", updates);
+  if (updated) {
+    products = products.map(p => (p.id === id ? updated : p));
+    renderProducts(products);
+  }
+}
+
+// DELETE product
+async function deleteProduct(id) {
+  await apiRequest(`/products/${id}`, "DELETE");
+  products = products.filter(p => p.id !== id);
+  renderProducts(products);
 }
 
 // ================= RENDER PRODUCTS =================

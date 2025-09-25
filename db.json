@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Tomatoes",
       "image": "images/Tomato_je.jpg",
       "description": "Fresh red tomatoes.",
@@ -11,19 +11,25 @@
           "name": "Mama Mboga A",
           "lat": -1.2921,
           "lng": 36.8219,
-          "prices": { "pcs": 5, "kg": 120 }
+          "prices": {
+            "pcs": 5,
+            "kg": 120
+          }
         },
         {
           "id": 2,
           "name": "Vendor B",
           "lat": -1.3001,
-          "lng": 36.8300,
-          "prices": { "pcs": 6, "kg": 130 }
+          "lng": 36.83,
+          "prices": {
+            "pcs": 6,
+            "kg": 130
+          }
         }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Potatoes",
       "image": "images/potatoes.PNG",
       "description": "Organic farm potatoes.",
@@ -31,14 +37,17 @@
         {
           "id": 1,
           "name": "Mama Mboga C",
-          "lat": -1.3100,
-          "lng": 36.8210,
-          "prices": { "pcs": 15, "kg": 80 }
+          "lat": -1.31,
+          "lng": 36.821,
+          "prices": {
+            "pcs": 15,
+            "kg": 80
+          }
         }
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Onions",
       "image": "images/RedOnion.PNG",
       "description": "Strong flavored onions.",
@@ -46,14 +55,17 @@
         {
           "id": 1,
           "name": "Vendor D",
-          "lat": -1.2950,
-          "lng": 36.8100,
-          "prices": { "pcs": 10, "kg": 100 }
+          "lat": -1.295,
+          "lng": 36.81,
+          "prices": {
+            "pcs": 10,
+            "kg": 100
+          }
         }
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Grapes",
       "image": "images/grapes.PNG",
       "description": "Sweet seedless grapes.",
@@ -62,13 +74,16 @@
           "id": 1,
           "name": "Fruit Vendor A",
           "lat": -1.2999,
-          "lng": 36.8120,
-          "prices": { "pcs": 25, "kg": 300 }
+          "lng": 36.812,
+          "prices": {
+            "pcs": 25,
+            "kg": 300
+          }
         }
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Cabbage",
       "image": "images/cabbage.PNG",
       "description": "Big and fresh cabbages.",
@@ -76,14 +91,17 @@
         {
           "id": 1,
           "name": "Mama Mboga E",
-          "lat": -1.3050,
+          "lat": -1.305,
           "lng": 36.8225,
-          "prices": { "pcs": 40, "kg": 60 }
+          "prices": {
+            "pcs": 40,
+            "kg": 60
+          }
         }
       ]
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Kales",
       "image": "images/Collard-Greens-Bundle.jpg",
       "description": "Healthy sukuma wiki.",
@@ -91,14 +109,17 @@
         {
           "id": 1,
           "name": "Vendor F",
-          "lat": -1.2980,
-          "lng": 36.8290,
-          "prices": { "pcs": 10, "kg": 50 }
+          "lat": -1.298,
+          "lng": 36.829,
+          "prices": {
+            "pcs": 10,
+            "kg": 50
+          }
         }
       ]
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Mangoes",
       "image": "images/mangoes.PNG",
       "description": "Juicy ripe mangoes.",
@@ -107,26 +128,34 @@
           "id": 1,
           "name": "Fruit Vendor B",
           "lat": -1.2905,
-          "lng": 36.8260,
-          "prices": { "pcs": 30, "kg": 150 }
+          "lng": 36.826,
+          "prices": {
+            "pcs": 30,
+            "kg": 150
+          }
         }
       ]
     },
+    
     {
-      "id": 8,
-      "name": "Carrots",
+      "id": "8",
+      "name": "Caroots",
       "image": "images/carrots.PNG",
-      "description": "Crunchy orange carrots.",
+      "description": "Fresh and Crunchy.",
       "vendors": [
         {
           "id": 1,
-          "name": "Vendor G",
-          "lat": -1.3020,
-          "lng": 36.8180,
-          "prices": { "pcs": 5, "kg": 90 }
+          "name": "Fruit Vendor B",
+          "lat": -1.2905,
+          "lng": 36.826,
+          "prices": {
+            "pcs": 5,
+            "kg": 100
+          }
         }
       ]
     }
   ],
-    "users": []
+  
+  "users": []
 }
