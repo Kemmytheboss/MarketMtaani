@@ -11,21 +11,64 @@ body {
   color: #333;
 }
 
-/* Header */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: green;
-  color: #ffffff;
-  padding: 20px 60px;
-}
+ .header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #008000;
+      gap: 10px;
+      flex-wrap: wrap; /* allows wrapping on small screens */
+    }
 
-.header input {
-  flex: 1;
-  margin: 0 10px;
-  padding: 8px;
-}
+    /* Logo */
+    .header .logo {
+      font-weight: bold;
+      color: #ffffff;
+      font-size: 1.2rem;
+      margin-right: auto; /* pushes search and buttons to the right */
+    }
+
+    /* Search input */
+    #search {
+      width: 200px;
+      max-width: 100%;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: width 0.3s ease;
+    }
+
+    /* Buttons styling */
+    .header button {
+      padding: 5px 10px;
+      border: none;
+      background-color: #0bdc0b;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .header button:hover {
+      background-color: #0bdc0b;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      #search {
+        width: 150px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #search {
+        width: 100px;
+        padding: 4px 8px;
+      }
+      .header button {
+        padding: 4px 6px;
+        font-size: 0.8rem;
+      }
+    }
 
 /* Product Grid */
 .product-grid {
@@ -130,7 +173,7 @@ body {
   position: absolute;
   right: 20px;
   top: 60px;
-  background: #ffffff;
+  background: #0bdc0b;
   border: 1px solid #ddd;
   width: 300px;
   max-height: 400px;
@@ -155,7 +198,7 @@ body {
 }
 /* General Button Style */
 button {
-  background: #008000; /* Main green */
+  background: #0bdc0b; /* Main green */
   color: #fff;
   border: none;
   padding: 10px 16px;
@@ -169,7 +212,7 @@ button {
 
 /* Hover effect */
 button:hover {
-  background: #00a000; /* lighter green */
+  background: #0bdc0b; /* lighter green */
   transform: translateY(-2px);
 }
 
@@ -260,14 +303,14 @@ button:disabled {
 }
 
 .btn.primary {
-  background: #008000;
+  background: #0bdc0b;
   color: #ffffff;
 }
 
 #categoriesBtn, #cart-btn {
   
-  background: #ffffff;
-  color: #008000;
+  background: #0bdc0b;
+  color: #ffffff;
   border: 1px solid #008000;
 }
 
