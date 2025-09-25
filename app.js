@@ -5,9 +5,16 @@ const cartDropdown = document.getElementById("cart-dropdown");
 const vendorPanel = document.getElementById("vendor-panel");
 const vendorContent = document.getElementById("vendor-content");
 const closeVendorBtn = document.getElementById("close-vendor");
-// const signupBtn = document.getElementById("signup-btn");
-// const loginBtn = document.getElementById("login-btn");
-// const logoutBtn = document.getElementById("logout-btn");
+const signupBtn = document.getElementById("signup-btn");
+const loginBtn = document.getElementById("login-btn");
+const signupSection = document.getElementById("signup-section");
+const loginSection = document.getElementById("login-section");
+const toLogin = document.getElementById("to-login");
+const toSignup = document.getElementById("to-signup");
+const logout = document.getElementById("logout");
+const userMenu = document.getElementById("user-menu");
+const userIcon = document.getElementById("user-icon");
+const userDropDown = document.getElementById("user-dropdown");
 // const authModal = document.getElementById("auth-modal");
 // const authTitle = document.getElementById("auth-title");
 // const authForm = document.getElementById("auth-form");
@@ -16,6 +23,7 @@ const darkModeBtn = document.getElementById("dark-mode-toggle");
 
 let products = [];
 let cartItems = [];
+let islLogin = false;
 
 // Fetch products from db.json
 async function fetchProducts() {
@@ -266,3 +274,82 @@ darkModeBtn.addEventListener("click", () => {
   }
 });
 
+
+// Show signup form
+signupBtn.addEventListener("click", () => {
+  signupSection.style.display = "block";
+  loginSection.style.display = "none";
+  signupSection.scrollIntoView({ behavior: "smooth" });
+});
+
+// Show login form
+loginBtn.addEventListener("click", () => {
+  loginSection.style.display = "block";
+  signupSection.style.display = "none";
+  loginSection.scrollIntoView({ behavior: "smooth" });
+});
+
+// Toggle links inside forms
+toLogin.addEventListener("click", () => {
+  signupSection.style.display = "none";
+  loginSection.style.display = "block";
+});
+
+toSignup.addEventListener("click", () => {
+  signupSection.style.display = "block";
+  loginSection.style.display = "none";
+});
+
+// Signup form submit
+document.getElementById("signup-form").addEventListener("submit", e => {
+  e.preventDefault();
+  isLoggedIn = true;
+  updateNavbar();
+  alert("Signup successful!");
+});
+
+// Login form submit
+document.getElementById("login-form").addEventListener("submit", e => {
+  e.preventDefault();
+  isLoggedIn = true;
+  updateNavbar();
+  alert("Login successful!");
+});
+
+// Update navbar based on login state
+function updateNavbar() {
+  if(isLoggedIn){
+    signupBtn.style.display = "none";
+    loginBtn.style.display = "none";
+    userMenu.style.display = "inline-block";
+    signupSection.style.display = "none";
+    loginSection.style.display = "none";
+  } else {
+    signupBtn.style.display = "inline-block";
+    loginBtn.style.display = "inline-block";
+    userMenu.style.display = "none";
+  }
+}
+
+// User dropdown toggle
+userIcon.addEventListener("click", () => {
+  userDropdown.style.display = userDropdown.style.display === "block" ? "none" : "block";
+});
+
+// Logout
+logout.addEventListener("click", () => {
+  isLoggedIn = false;
+  updateNavbar();
+  alert("You have logged out!");
+  userDropdown.style.display = "none";
+});
+
+// Close dropdown if clicked outside
+window.addEventListener("click", (e) => {
+  if(!userIcon.contains(e.target) && !userDropdown.contains(e.target)){
+    userDropdown.style.display = "none";
+  }
+});
+
+// Initialize navbar state
+updateNavbar();
